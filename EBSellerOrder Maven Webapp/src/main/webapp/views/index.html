@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>测试</title>
+	
+    <meta name="keywords" content="keyword1,keyword2,keyword3">
+    <meta name="description" content="this is my page">
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="../Common/stylesheets/weui.css"/>
+    <script src='../Common/content/jquery-1.7.2.min.js' type="text/javascript"></script>
+    <script src='../Common/content/jquery.cookie.js' type="text/javascript"></script>
+    <script src='../Common/js/Setting.js' type="text/javascript"></script>
+    <script src='../Common/js/AjaxJson.js' type="text/javascript"></script>
+    <script src='../Common/js/jweixin.js' type="text/javascript"></script>
+    <script src='../Common/js/wxconfig.js' type="text/javascript"></script>
+    <script src="https://res.wx.qq.com/open/libs/weuijs/1.0.0/weui.min.js"></script>
+    
+    
+    <!--<link rel="stylesheet" type="text/css" href="./styles.css">-->
+    
+    <script type="text/javascript">
+    $(function(){
+	//获取当前登录用户信息
+	getCurrentUser();
+	
+});
+/**
+ * 获取当前登录用户信息
+ */
+function getCurrentUser(){
+	var data = "";
+	var url = baseurl + "/sellerLogin/getCurrentUser";
+	sendRequest("post", url, data, getGetCurrentUserResult);
+	return false;
+};
+
+/**
+ * 获取当前登录用户信息的返回结果
+ * @param result
+ * @returns {Boolean}
+ */
+function getGetCurrentUserResult(result){
+	var data = eval("(" + result + ")");
+	if(data.name=='' || data.name==null){
+		window.location.href = baseurl + "/views/login/login.html";
+	}else{
+		$("input[name='currentUser']").val(data.name);
+	}
+	return false;
+}
+    
+    </script>
+  </head>
+  
+  <body>
+  		<div id="user" style="font-size:40px;">
+  			<div class="weui-cell" >
+              <div class="weui-cell__hd" style="width:20%;"><label class="weui-label">当前用户：</label></div>
+              <div class="weui-cell__bd" >
+                  <input class="weui-input" name="currentUser" type="text" disabled="disabled"/>
+              </div>
+            </div>
+  		</div>
+  </body>
+</html>

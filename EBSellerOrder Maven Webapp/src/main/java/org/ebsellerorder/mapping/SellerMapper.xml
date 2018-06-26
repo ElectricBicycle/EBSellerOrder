@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.ebsellerorder.dao.SellerDao">
+	<resultMap type="org.ebsellerorder.pojo.Seller" id="BaseResultMap">
+		<result property="sellerCode" column="sellerCode" />
+		<result property="sellerName" column="sellerName" />
+		<result property="sellerShortName" column="sellerShortName" />
+		<result property="sellerDeliveryAddress" column="sellerDeliveryAddress" />
+		<result property="contactor" column="contactor" />
+		<result property="contactorTele" column="contactorTele" />
+		<result property="areaCode" column="areaCode" />
+	</resultMap>
+
+	<select id="findAllSeller" resultMap="BaseResultMap">
+		select * from seller
+	</select>
+	
+	<!-- 登录时获取名称 -->
+	<select id="searchSellerNameByAccount" parameterType="String" resultMap="BaseResultMap">
+		SELECT * FROM seller
+				 WHERE sellerCode=#{sellerCode}
+	</select>
+</mapper>

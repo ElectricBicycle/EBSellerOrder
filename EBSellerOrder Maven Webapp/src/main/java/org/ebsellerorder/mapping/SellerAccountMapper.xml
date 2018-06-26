@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.ebsellerorder.dao.SellerAccountDao">
+	<resultMap type="org.ebsellerorder.pojo.SellerAccount" id="BaseResultMap">
+		<result property="sellerCode" column="sellerCode" />
+		<result property="password" column="password" />
+		<result property="sellerName" column="sellerName" />
+	</resultMap>
+	
+	<!-- 登录时检查账户 -->
+	<select id="checkifAccount" parameterType="org.ebsellerorder.pojo.SellerAccount" resultMap="BaseResultMap">
+		SELECT * FROM sellerAccount
+				 WHERE sellerCode=#{sellerCode}
+	</select>
+	
+	<!-- 登录 -->
+	<select id="sellerAccountLogin" parameterType="org.ebsellerorder.pojo.SellerAccount" resultMap="BaseResultMap">
+		SELECT * FROM sellerAccount
+				 WHERE sellerCode=#{sellerCode}
+				 AND password=#{password}
+	</select>
+</mapper>
